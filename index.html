@@ -1,79 +1,495 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Solidasagile : Presentation on SOLID principles for Agile">
+	<head>
+		<meta charset="utf-8">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+		<title>SOLID principles for Agile development</title>
 
-    <title>Solidasagile</title>
-  </head>
+		<meta name="description" content="A presentation on SOLOD principles">
+		<meta name="author" content="Laurent Thil">
 
-  <body>
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/lathil/SolidAsAgile">View on GitHub</a>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-          <h1 id="project_title">Solidasagile</h1>
-          <h2 id="project_tagline">Presentation on SOLID principles for Agile</h2>
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/solarized.css" id="theme">
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/lathil/SolidAsAgile/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/lathil/SolidAsAgile/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+	<body>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+		<div class="reveal">
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>SOLID</h1>
+					<h3>Principes pour un development Agile</h3>
+					<p>
+						<small>Ecrit par <a href="https://github.com/lathil">Laurent Thil</a></small>
+					</p>
+				</section>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+				<section>
+					<h2>Nouvelle donne !</h2>
+					<p>Votre management à decidé d'utiliser les principes Agiles. La methode Scrum va être mise en place.
+					</p>
+					<img width="600
+					" src="images/scrum-daily-scrums2-axisagile-scrumtroopers.jpg"/>
+				</section>
+				
+				<section>
+					<h2>Agile, oui mais ...</h2>
+					<p>Cela implique que ...</p>
+					<ul>
+						<li class="fragment">le developement sera iteratif</li>
+						<li class="fragment">le code sera soumis à des evolutions</li>
+						<li class="fragment">.. ainsi que vos tests ..</li>
+					</ul>
+					<p/>
+					<h3 class="fragment">.. en gros votre code devra être Agile</h3>
+				</section>
+				
+				<section>
+					<h2>L'est -il ?</h2>
+					<p>Comme indication utilisez les 'design smells' suivants:</p>
+					<ul>
+						<li class="fragment">Rigide : <i>resite au changement</i></li>
+						<li class="fragment">Fragile : <i>une partie du logiciel de fonctionne plus quand un modification est faite ailleurs</i></li>
+						<li class="fragment">Immobile : <i>re-utilisation difficile</i></li>
+						<li class="fragment">Visqueux : <i>plus de hacks que de design</i></li>
+						<li class="fragment">Complex : <i></i></li>
+						<li class="fragment">Repetitif : <i>duplication de certaine parties</i></li>
+						<li class="fragment">Opaque : <i>difficile à comprendre</i></li>
+					</ul>
+					<p/>
+					<p class="fragment">Si un de ces symptôme est present votre code n'est pas agile.</p>
+				</section>
+				
+				<section>
+					<h2>Comment en somme nous arrivés là ?</h2>
+					<p>Pour des raison telles que</p>
+					<ul>
+						<li>Cycle en V: les besoins changes</li>
+						<li>Code est chaotique par nature</li>
+						<li>Pas de bonne connaissances en OO design</li>
+					</ul>
+				</section>
+				
+				<section>
+					<h2>Aidons nous avec ...</h2>
+					<img width="800" src="images/SOLID_6EC97F9C.jpg"/>
+				</section>
+				
+				<section>
+					<h2>Solid ..</h2>
+					<p>Un acronyme pour 5 principes:</p>
+					<ul>
+						<li>Single responsability principle</li>
+						<li>Open close principle</li>
+						<li>Liskov substitution principle</li>
+						<li>Interface segregation principle</li>
+						<li>Dependency inversion principle</li>
+					</ul>
+				</section>
+				
+				<section>
+					<section>
+						<h2>Single responsability principle</h2>
+						<img width="800" src="images/SingleResponsibilityPrinciple2_71060858.jpg"/>
+					</section>
+					<section>
+						<h2>SRP dit: Il ne devrait y avoir qu'une seule raison pour laquelle une classe change.</h2>
+						<p>1 raison = 1 responsablititée.</p>
+						<p>X raisons = X changements</p>
+						<p>X changements = X occasions d'introduire des bugs</p>
+						<p>X changements = stabilitée douteuse de l'object</p>
+					</section>
+					<section>
+						<h2>Example</h2>
+						<pre>
+							<code class="java" data-trim>
+public class BasicCar {
+	void turnLeft(){}
+	void turnRight(){}
+	void forward(){}
+	void reverse(){}
+	void doGeoPosition(){}
+}
+							</code>
+						</pre>
+						<p>2 raisons de changer: comportement standard d'une voiture et comportement avancé.</p>
+					</section>
+					<section>
+						<h2>Amélioration par les patterns Template ou composition.</h2>
+						<pre>
+							<code class="java" data-trim>
+public class BasicCar {
+	void turnLeft(){}
+	void turnRight(){}
+	void forward(){}
+	void reverse(){}
+}					
+public class GeoCar extends BasicCar{
+	void doGeoPosition(){}
+}
+							</code>
+						</pre>
+						<p>Ici utilisation du pattern template.</p>
+					</section>
+				</section>
+				
+				<section>
+					<section>
+						<h2>Open close principle</h2>
+						<img width="800" src="images/OpenClosedPrinciple2_2C596E17.jpg"/>
+					</section>
+					<section>
+						<h2>OCP dit: entitées ( objects, modules,  ...) doivent êtres ouvertes à l'extension et fermées à la modifications.</h2>
+						<p>Autrement ont doit pouvoir alterer le comportement d'une entitée sans en modifier son code source.</p>
+					</section>
+					<section>
+						<p>Classe initiale</p>
+						<pre>
+							<code class="java" data-trim>
+public class TrackingCar{
+	void trackGpsSignal(Signal source){}
+}
+							</code>
+						</pre>
+						<p>Classe modifiée</p>
+						<pre>
+							<code class="java" data-trim>
+public class TrackingCar{
+	void trackGpsSignal(Signal source){}
+	void trackGlonasSignal(Signal source){}
+}						
+							</code>
+						</pre>
+						<p> OCP non suivit ici: classe initiale à été modifiée pour l'extension</p>
+					</section>
+					<section>
+						<p>Amelioration avec le template pattern</p>
+						<pre>
+							<code class="java" data-trim>
+public class TrackingCar{
+	public abstract void trackSignal(Signal source);
+}
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+public class GpsTrackingCar extends TrackingCar{
+	trackSignal(Signal source){}
+}
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+public class GlonasTrackingCar extends TrackingCar{
+	trackSignal(Signal source){}
+}
+							</code>
+						</pre>
+					</section>
+					<section>
+						<p>Amelioration avec le pattern Strategy</p>
+						<pre>
+							<code class="java" data-trim>
+public class TrackingCar{
+	public TrackingCar(TrackingStrategy strategy){}
+	public void track( Signal source){
+		strategy.track( source);
+	}
+}	
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+public class GpsTrackingStrategy implements TrackingStrategy{
+	void track(Signal source){}
+}
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+public class GlonasTrackingStrategy implements TrackingStrategy{
+	void track(Signal source){}
+}
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-    </div>
+							</code>
+						</pre>
+					</section>
+				</section>
+				
+				<section>
+					<section>
+						<h2>Liskov substitution principle</h2>
+						<img width="800" src="images/LiskovSubtitutionPrinciple_52BB5162.jpg"/>
+					</section>
+					<section>
+						<h2>LSP dit: si une fonction fait reference à un object de base, elle doit être capable d'en utiliser les sous-types sans le savoir.</h2>
+						<p>Ne pas le faire tend à violer OCP</p>
+					</section>
+					<section>
+						<p>Example</p>
+						<pre>
+							<code class="java" data-trim>
+interface ISignal{
+	public void track();
+}
+public class GpsSignal implements ISignal {
+	public void track(){};
+	public warmupGpsSignal(){};
+}
+public class GlonasSignal implements ISignal {
+	public void track(){};
+	public warmupGlonasSignal(){};
+}
+							</code>
+						</pre>
+						<p>GpsSignal et GlonasSignal semblent être interchangeable</p>
+					</section>
+					<section>
+						<p>LSP et OCP violation</p>
+						<pre>
+							<code class="java" data-trim>
+public class TrackingStrategy{
+	public void warmUpSignal(ISignal signal){
+		if( signal instanceof GpsSignal){
+			((GpsSignal) signal) warmupGpsSignal();
+		} else if( signal instanceof GlonasSignal){
+			((GlonasSignal) signal) warmupGlonasSignal();
+		}
+	}
+}
+							</code>
+						</pre>
+						<p>OCP n'est pas respecté car TrackingStrategy doit être modifié si un nouvel ISignal implementation est introduit</p>
+						<p>cause: GpsSignal et GlonasSignal ne respectent pas LSP</p>
+					</section>
+					<section>
+						<p>modification en suivant Design by Contract</p>
+						<pre>
+							<code class="java" data-trim>
+interface ISignal{
+	public void track();
+	public void warmupSignal();
+}
+public class GpsSignal implements ISignal {
+	public void track(){};
+	public void warmupSignal(warmupGpsSignal(););
+	private warmupGpsSignal(){};
+}
+public class GlonasSignal implements ISignal {
+	public void track(){};
+	public void warmupSignal(warmupGlonasSignal(););
+	private warmupGlonasSignal(){};
+}						
+							</code>
+						</pre>
+					</section>
+				</section>
+				
+				<section>
+					<section>
+						<h2>Interface segregation principle</h2>
+						<img width="800" src="images/InterfaceSegregationPrinciple_60216468.jpg"/>
+					</section>
+					<section>
+						<h2>ISP dit: Une implementation ne devrait pas dependre sur des interfaces qu'elle n'a pas besoin.</h2>
+						<p>Autrement dit:</p>
+						<ul>
+							<li>ne pas creer d'interface 'universelle'</li>
+							<li>penser à la responsabilité que l'interface veux presenter</li>
+							<li>favoriser la composition</li>
+						</ul>
+					</section>
+					<section>
+						<p>Example violant ISP</p>
+						<pre>
+							<code class="java" data-trim>
+interface IGeneralCar {
+	void turn(){}
+	void forward(){}
+	void reverse(){}
+	void senseObstacle(){}
+	void autoPark(){}
+}
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Solidasagile maintained by <a href="https://github.com/lathil">lathil</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
+public class DeuxCV implements IGeneralCar {
+	void turn(){}
+	void forward(){}
+	void reverse(){}
+	void senseObstacle(){
+		return new Exception("not implemented")
+	}
+	void autoPark(){{
+		return new Exception("not implemented")
+	}
+}
+							</code>
+						</pre>
+					</section>
+					<section>
+						<p>Mieux</p>
+					<pre>
+							<code class="java" data-trim>
+interface IGeneralCar {
+	void turn(){}
+	void forward(){}
+	void reverse(){}
+}
+interface IAdvanceCar {
+	void senseObstacle(){}
+	void autoPark(){}
+}
+public Car CaptureCar implements IGeneralCar, IAdvanceCar {
+	...
+}
 
-    
 
-  </body>
+							</code>
+						</pre>
+					</section>
+				</section>
+				
+				<section>
+					<section>
+						<h2>Dependency inversion principle</h2>
+						<img width="800" src="images/DependencyInversionPrinciple_0278F9E2.jpg"/>
+					</section>
+					<section>
+						<h2>DIP dit: 
+							<ul>
+								<li>Les modules de haut niveau ne doivent pas dependre sur des modules de bas niveau; Les deux doivent dependre sur des abstraction</li>
+								<li>Les abstractions ne doivent pas dependrent des details. Les details doivent dependre des abstractions</li>
+							</ul>
+						</h2>
+					</section>
+					<section>
+						<h2>? ... Humm...</h2>
+						<p>De quoi parle t'on ici ?</p>
+						<ul>
+							<li>DIP traite de minimiser les dependences entre modules</li>
+							<li>En Java un module peut être considére comme un package</li>
+							<li>Donc, minimiser les dependences enre packages</li>
+						</ul>
+					</section>
+					<section>
+						<h2>ne faites pas comme ca</h2>
+						<pre>
+							<code class="java" data-trim>
+package com.ia.automotive
+public AdvanceCar(){
+	private ManualDrivingSystem drive
+	void driveLeft(){
+		drive.driveLeft();
+	}
+}
+package com.ia.automotive.drivingsystem
+public DrivingSystem{
+	driveLeft(){}
+}
+							</code>
+						</pre>
+						<p>Dependence direct de com.ia.automotive vers com.ia.automotive.drivingsystem</p>
+					</section>
+					<section>
+						<h2>Inversez les dependences</h2>
+						<pre>
+							<code class="java" data-trim>
+package com.ia.automotive
+public AdvanceCar(){
+	DrivingSystem drive
+	void driveLeft(){
+		drive.driveLeft();
+	}
+}
+public interface DrivingSystem{
+	driveLeft();
+}
+package com.ia.automotive.manualdriving
+public ManualDrivingSystem implements DrivingSystem {
+	driveLeft(){}
+}
+
+							</code>
+						</pre>
+						<p>package com.ia.automotive ne depends plus d'un sous package</p>
+						<p>-> les dependences sont inversées</p>
+						<p>le module de haut niveaux est plus facilement extractible.</p>
+					</section>
+					<section>
+						<h2>Conclusion</h2>
+						<p>benefices de SOLID</p>
+						<ul>
+							<li>bas couplage des modules</li>
+							<li>haut niveau de cohesion</li>
+							<li>encapsulation : les details sont cachés.</li>
+						</ul>
+						<p>Solid sublime OO design, evite prodedural<p>
+					</section>
+					<section>
+						<h2>references</h2>
+						<a href="http://vimeo.com/43592685">Robert C. Martin - The Single Responsibility Principle</a>
+						<a href="http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod">PrinciplesOfOod</a>
+						<a href="http://www.amazon.com/Software-Development-Principles-Patterns-Practices/dp/0135974445">Agile Software Development, Principles, Patterns, and Practices</a>
+					</section>
+					<section>
+						<h2>Credits</h2>
+						<a href="http://lostechies.com/derickbailey/2009/02/11/solid-development-principles-in-motivational-pictures/">http://lostechies.com/derickbailey/2009/02/11/solid-development-principles-in-motivational-pictures/</a>
+						<a href="http://williamdurand.fr/2013/07/30/from-stupid-to-solid-code/">http://williamdurand.fr/2013/07/30/from-stupid-to-solid-code/</a>
+						<a href=http://lostechies.com/derickbailey/2009/02/11/solid-development-principles-in-motivational-pictures/">Emotional pictures</a>
+					</section>
+				</section>
+
+				
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
 </html>
